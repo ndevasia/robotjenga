@@ -1,5 +1,3 @@
-var worldWidth = 400
-var worldHeight = 400
 var xCenter = worldWidth / 2
 var ground = {shape: 'rect', static: true, dims: [worldWidth, 10], x: worldWidth/2, y: worldHeight}
 var dim = function() { uniform(10, 50) };
@@ -34,4 +32,16 @@ var makeTowerWorld = function () {
   return [ground, block1, block2, block3, block4, block5]
 };
 
-physics.animate(1000, makeTowerWorld())
+//Simulate the world state at several different time points
+var times =  _.range(0, 500, 20)
+
+var initialWorld = makeTowerWorld()
+
+var worlds_t = map(function(t){
+  var state = physics.run(t, initialWorld)
+  return state
+},times)
+
+print(worlds_t[0])
+
+physics.animate(1000, initialWorld)
