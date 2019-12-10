@@ -1,3 +1,9 @@
+var doesTowerFall = function (initialW, finalW) {
+  var highestY = function (w) { listMin(map(function(obj) { return obj.y }, w)) }
+  var approxEqual = function (a, b) { Math.abs(a - b) < 1.0 }
+  !approxEqual(highestY(initialW), highestY(finalW))
+}
+
 var xCenter = worldWidth / 2
 var ground = {shape:"rect",
               static:true,
