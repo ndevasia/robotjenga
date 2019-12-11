@@ -4,6 +4,34 @@ var doesTowerFall = function (initialW, finalW) {
   !approxEqual(highestY(initialW), highestY(finalW))
 }
 
+//Collecting our motion data
+var getMotion = function(initialWorld){
+
+  return map(function(block){
+
+
+    //Simulate the world state at several different time points
+    var velocities =  _.range(50, 1000, 5) //make this finer intervals
+
+    var worlds_t = map(function(v){
+      //helper function that takes in velocity and block, simulates, returns score if it worked
+      return score
+    },velocities)
+    
+    //find the world where the boolean is true
+    var final = find(function(w_t){return w_t[0].velocity[0] < 0.5}, worlds_t)
+    //extract the property of interest
+    var distance = final[0].x
+
+    //find the maximum velocity
+
+    
+    return //map of blocks to scores/distances
+
+  }, worldMinusGround)
+
+}
+
 var xCenter = worldWidth / 2
 var ground = {shape:"rect",
               static:true,
