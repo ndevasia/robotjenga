@@ -22,10 +22,7 @@ var helperFunction = function(velocity, block, world){
               y:blockToPush.y,
               velocity:[velocity,0]}
   var newWorld = n.concat(blockCopy).concat(world.slice(block+1, world.length))
-  print(n)
   var initState = physics.run(0, newWorld)
-  print("INIT")
-  print(initState)
   var endState = physics.run(10000, newWorld)
   var towerFell = doesTowerFall(initState, endState)
   if (towerFell){
@@ -52,8 +49,7 @@ var blockToScoreMap =  map(function(block){
       var score = helperFunction(v, block, initialWorld)
       return score
     },velocities)
-    
-    print(velocityToScoreMap)
+
     return velocityToScoreMap(0)
     //find the world where the boolean is true
     //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
@@ -118,8 +114,7 @@ var blockToScoreMap =  map(function(block){
       return score
     },velocities)
     
-    print(velocityToScoreMap)
-    return velocityToScoreMap(0)
+    return velocityToScoreMap
     //find the world where the boolean is true
     //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
     
