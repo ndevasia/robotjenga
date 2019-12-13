@@ -24,28 +24,29 @@ var helperFunction = function(velocity, block, world){
 //Collecting our motion data
 var getMotion = function(initialWorld){
 
-  return map(function(block){
 
 
-    //Simulate the world state at several different time points
+var blockToScoreMap =  map(function(block){
+
+
+    //find all velocities to try
     var velocities =  _.range(0, 10, 0.5) //make this finer intervals
 
-    var worlds_t = map(function(v){
+    var velocityToScoreMap = map(function(v){ //for each block
       //helper function that takes in velocity and block, simulates, returns score if it worked
+      var score = helperFunctin(v, block, initialWorld)
       return score
     },velocities)
     
     //find the world where the boolean is true
-    var final = find(function(w_t){return w_t[0].velocity[0] < 0.5}, worlds_t)
-    //extract the property of interest
-    var distance = final[0].x
-
-    //find the maximum velocity
-
+    var blocksMaxScore = find(/*return max score in map of velocities to score for this block*/, velocityToScoreMap)
     
     return //map of blocks to scores/distances
 
   }, worldMinusGround)
+
+  var totalMaxScore = find(/*function that will find the max score in the map, return block and score*/, blockToScoreMap) //
+  return totalMaxScore //or block, score, whatever
 
 }
 
