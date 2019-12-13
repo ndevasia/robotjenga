@@ -4,6 +4,23 @@ var doesTowerFall = function (initialW, finalW) {
   !approxEqual(highestY(initialW), highestY(finalW))
 }
 
+var helperFunction = function(velocity, block, world){
+  var blockToPush = world[block]
+  blockToPush.velocity = [velocity, 0]
+  world[block] = blockToPush
+  var initState = physics.run(0, world)
+  var endState = physics.run(10000, world)
+  var towerFell = doesTowerFall(initState, endState)
+  if (towerFell){
+    return -1
+  }
+  else{
+    var dist = endState[block].x - initState[block].x
+    return dist*block
+  }
+  
+}
+
 //Collecting our motion data
 var getMotion = function(initialWorld){
 
@@ -11,7 +28,7 @@ var getMotion = function(initialWorld){
 
 
     //Simulate the world state at several different time points
-    var velocities =  _.range(50, 1000, 5) //make this finer intervals
+    var velocities =  _.range(0, 10, 0.5) //make this finer intervals
 
     var worlds_t = map(function(v){
       //helper function that takes in velocity and block, simulates, returns score if it worked
@@ -388,28 +405,4 @@ var b121 = {shape:"rect",
               y:243.0594474468529}
 var b122 = {shape:"rect",
               static:false,
-              dims:[35.50704027394914,47.780058551348304],
-              x:315.07863325751214,
-              y:305.03980429536495}
-
-var b123 = {shape:"rect",
-              static:false,
-              dims:[22.647945610455423,16.17438351708752],
-              x:a.88442897271335,
-              y:368.99424636380076}
-
-var b124 = {shape:"rect",
-              static:false,
-              dims:[39.30182539940228,36.33144642308958],
-              x:296.3135117874227,
-              y:421.50007630397783}
-
-var b125 = {shape:"rect",
-              static:false,
-              dims:[31.90604709511714,16.084238636466296],
-              x:300,
-              y:473.9157613635337}
-
-var tower12 = [ground, b121, b122, b123, b124, b125]
-physics.animate(1000, tower12)
-*/
+              dims:[35.507040273949
