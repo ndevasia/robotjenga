@@ -32,20 +32,22 @@ var helperFunction = function(velocity, block, world){
 var getMotion = function(initialWorld){
 
 
-
+var worldMinusGround = world.splice(1, world.length)
 var blockToScoreMap =  map(function(block){
 
-
+    return 0
     //find all velocities to try
     var velocities =  _.range(0,10, 0.1) //make this finer intervals
 
     var velocityToScoreMap = map(function(v){ //for each block
+      print(v)
       //helper function that takes in velocity and block, simulates, returns score if it worked
       var score = helperFunction(v, block, initialWorld)
       return score
     },velocities)
     
     print(velocityToScoreMap)
+    return velocityToScoreMap(0)
     //find the world where the boolean is true
     //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
     
