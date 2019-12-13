@@ -17,7 +17,7 @@ print(avg)
 a_towers = [i for i in avg.keys()]
 a_block = [avg[i][0] for i in a_towers]
 a_dist = [avg[i][1] for i in a_towers]
-plt.stem(a_towers, a_block)
+plt.stem(a_towers, a_block, linefmt = 'red')
 plt.show()
 plt.stem(a_towers, a_dist)
 plt.show()
@@ -39,7 +39,7 @@ m_towers = [i for i in mode.keys()]
 m_block = [avg[i][0] for i in m_towers]
 m_dist = [avg[i][1] for i in m_towers]
 
-plt.stem(m_towers, m_block, color = 'red')
+plt.stem(m_towers, m_block, linefmt = 'red')
 plt.show()
 plt.stem(m_towers, m_dist)
 plt.show()
