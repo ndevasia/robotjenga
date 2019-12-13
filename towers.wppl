@@ -100,7 +100,35 @@ var b15 = {shape:"rect",
 
 var tower1 = [ground, b11, b12, b13, b14, b15]
 physics.animate(1000, tower1)
-var test = blockToScoreMap(b11)
+
+
+var worldMinusGround = tower1.splice(1, tower1.length)
+print(worldMinusGround)
+
+var blockToScoreMap =  map(function(block){
+  print(block)
+
+    //find all velocities to try
+    var velocities =  _.range(0,10, 0.1) //make this finer intervals
+    print(velocities)
+
+    var velocityToScoreMap = map(function(v){ //for each block
+      //helper function that takes in velocity and block, simulates, returns score if it worked
+      print(v, block)
+      var score = helperFunction(v, block, tower1)
+      return score
+    },velocities)
+    
+    print(velocityToScoreMap)
+    return velocityToScoreMap(0)
+    //find the world where the boolean is true
+    //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
+    
+    //return //map of blocks to scores/distances
+
+  }, worldMinusGround)
+//physics.animate(1000, tower1)
+var test = blockToScoreMap
 test
 
 
