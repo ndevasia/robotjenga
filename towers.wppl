@@ -1,3 +1,23 @@
+var xCenter = worldWidth / 2
+var ground = {shape:"rect",
+              static:true,
+              dims:[600,10],
+              x:175,
+              y:500.00000000000006}
+//Tower 1
+var b51 = {shape:"rect",
+              static:false,
+              dims:[24.809880007962853/2,77.38194561401946/2],
+              x:187.4319795863756,
+              y:356.6289134648006}
+var b52 = {shape:"rect",
+              static:false,
+              dims:[53.56021326439544/2,94.68011372818967/2],
+              x:175,
+              y:442.65994313590517}
+
+var tower5 = [ground, b51, b52]
+
 var listMin = function(xs) {
   if (xs.length == 1) {
     return xs[0]
@@ -29,7 +49,7 @@ var helperFunction = function(velocity, block, world){
     return -1
   }
   else{
-    var dist = endState[block].x - initState[block].x
+    var dist = Math.abs(initState[block].x - endState[block].x)
     return dist*block
   }
   
@@ -37,10 +57,9 @@ var helperFunction = function(velocity, block, world){
 
 //Collecting our motion data
 var getMotion = function(initialWorld){
+  var worldMinusGround = _.range(1, initialWorld.length)
+  var blockToScoreMap =  map(function(block){
 
-
-var worldMinusGround = _.range(1, tower1.length)
-var blockToScoreMap =  map(function(block){
     //find all velocities to try
     var velocities =  _.range(0,10, 0.1) //make this finer intervals
 
@@ -49,21 +68,27 @@ var blockToScoreMap =  map(function(block){
       var score = helperFunction(v, block, initialWorld)
       return score
     },velocities)
-
-    return velocityToScoreMap(0)
+    var sorted = sort(velocityToScoreMap)
+    return sorted[sorted.length-1] //max of each block
     //find the world where the boolean is true
     //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
     
     //return //map of blocks to scores/distances
 
   }, worldMinusGround)
+return blockToScoreMap
 
   //var totalMaxScore = find(/*function that will find the max score in the map, return block and score*/, blockToScoreMap) //
   //var halfSpeed = find(function(w_t){return w_t[0].velocity[0] < (worlds_t[0][0].velocity[0]/2)}, worlds_t)
   //return totalMaxScore //or block, score, whatever
 
 }
+var t5 = getMotion(tower5)
+print(t5)
 
+
+//Tower 1
+/*
 var xCenter = worldWidth / 2
 var ground = {shape:"rect",
               static:true,
@@ -102,28 +127,7 @@ var b15 = {shape:"rect",
 
 
 var tower1 = [ground, b11, b12, b13, b14, b15]
-var worldMinusGround = _.range(1, tower1.length)
-var blockToScoreMap =  map(function(block){
-
-    //find all velocities to try
-    var velocities =  _.range(0,10, 0.1) //make this finer intervals
-
-    var velocityToScoreMap = map(function(v){ //for each block
-      //helper function that takes in velocity and block, simulates, returns score if it worked
-      var score = helperFunction(v, block, tower1)
-      return score
-    },velocities)
-    
-    return velocityToScoreMap
-    //find the world where the boolean is true
-    //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
-    
-    //return //map of blocks to scores/distances
-
-  }, worldMinusGround)
-var test = blockToScoreMap
-test
-
+*/
 
 //Tower 2
 /*
