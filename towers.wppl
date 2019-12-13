@@ -5,11 +5,18 @@ var doesTowerFall = function (initialW, finalW) {
 }
 
 var helperFunction = function(velocity, block, world){
+  var newWorld = world.splice(0, block)
   var blockToPush = world[block]
-  blockToPush.velocity = [velocity, 0]
-  world[block] = blockToPush
-  var initState = physics.run(0, world)
-  var endState = physics.run(10000, world)
+  var blockCopy = {shape:"rect",
+              static:false,
+              dims:[blockToPush.dims[0],blockToPush.dims[1]],
+              x:blockToPush.x,
+              y:blockToPush.y,
+              velocity:[velocity,0]}
+  newWorld.concat(blockCopy)
+  newWorld.concat(world.splice(block+1, world.length))
+  var initState = physics.run(0, newWorld)
+  var endState = physics.run(10000, newWorld)
   var towerFell = doesTowerFall(initState, endState)
   if (towerFell){
     return -1
@@ -30,23 +37,25 @@ var blockToScoreMap =  map(function(block){
 
 
     //find all velocities to try
-    var velocities =  _.range(0, 10, 0.5) //make this finer intervals
+    var velocities =  _.range(0,10, 0.1) //make this finer intervals
 
     var velocityToScoreMap = map(function(v){ //for each block
       //helper function that takes in velocity and block, simulates, returns score if it worked
-      var score = helperFunctin(v, block, initialWorld)
+      var score = helperFunction(v, block, initialWorld)
       return score
     },velocities)
     
+    print(velocityToScoreMap)
     //find the world where the boolean is true
-    var blocksMaxScore = find(/*return max score in map of velocities to score for this block*/, velocityToScoreMap)
+    //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
     
-    return //map of blocks to scores/distances
+    //return //map of blocks to scores/distances
 
   }, worldMinusGround)
 
-  var totalMaxScore = find(/*function that will find the max score in the map, return block and score*/, blockToScoreMap) //
-  return totalMaxScore //or block, score, whatever
+  //var totalMaxScore = find(/*function that will find the max score in the map, return block and score*/, blockToScoreMap) //
+  //var halfSpeed = find(function(w_t){return w_t[0].velocity[0] < (worlds_t[0][0].velocity[0]/2)}, worlds_t)
+  //return totalMaxScore //or block, score, whatever
 
 }
 
@@ -89,6 +98,10 @@ var b15 = {shape:"rect",
 
 var tower1 = [ground, b11, b12, b13, b14, b15]
 physics.animate(1000, tower1)
+var test = blockToScoreMap(b11)
+test
+
+
 
 //Tower 2
 /*
