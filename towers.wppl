@@ -4,24 +4,18 @@ var ground = {shape:"rect",
               dims:[600,10],
               x:175,
               y:500.00000000000006}
-var b41 = {shape:"rect",
+var b51 = {shape:"rect",
               static:false,
-              dims:[80.4766451135908/2,65.44080881932777/2],
-              x:202.9496107821619,
-              y:344.40146820161004}
-var b42 = {shape:"rect",
+              dims:[24.809880007962853/2,77.38194561401946/2],
+              x:187.4319795863756,
+              y:356.6289134648006}
+var b52 = {shape:"rect",
               static:false,
-              dims:[29.700931679288345/2,48.58046804026043/2],
-              x:194.37651209789718,
-              y:401.41210663140413}
-
-var b43 = {shape:"rect",
-              static:false,
-              dims:[63.93225213179547/2,64.29765934846566/2],
+              dims:[53.56021326439544/2,94.68011372818967/2],
               x:175,
-              y:457.85117032576716}
+              y:442.65994313590517}
 
-var tower4 = [ground, b41, b42, b43]
+var tower5 = [ground, b51, b52]
 
 var listMin = function(xs) {
   if (xs.length == 1) {
@@ -75,24 +69,15 @@ var getMotion = function(initialWorld){
     },velocities)
     var sorted = sort(velocityToScoreMap)
     return sorted[sorted.length-1] //max of each block
-    //find the world where the boolean is true
-    //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
-    
-    //return //map of blocks to scores/distances
 
   }, worldMinusGround)
-var sortedMax = sort(blockToScoreMap)
-return sortedMax[sortedMax.length-1]
-
-
-  //var totalMaxScore = find(/*function that will find the max score in the map, return block and score*/, blockToScoreMap) //
-  //var halfSpeed = find(function(w_t){return w_t[0].velocity[0] < (worlds_t[0][0].velocity[0]/2)}, worlds_t)
-  //return totalMaxScore //or block, score, whatever
+  var sortedMax = sort(blockToScoreMap)
+  print(sortedMax)
+  return sortedMax[sortedMax.length-1]
 
 }
-var t5 = getMotion(tower4)
+var t5 = getMotion(tower5)
 print(t5)
-
 
 
 
