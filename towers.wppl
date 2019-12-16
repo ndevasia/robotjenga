@@ -7,26 +7,16 @@ var ground = {shape:"rect",
 //Tower 2
 var b121 = {shape:"rect",
               static:false,
-              dims:[33.44135428805417,14.20029829716379],
-              x:333.8708511360935,
-              y:243.0594474468529}
-var b122 = {shape:"rect",
+              dims:[24.809880007962853/2,77.38194561401946/2],
+              x:187.4319795863756,
+              y:356.6289134648006}
+var b52 = {shape:"rect",
               static:false,
-              dims:[35.50704027394914,47.780058551348304],
-              x:315.07863325751214,
-              y:305.03980429536495}
+              dims:[53.56021326439544/2,94.68011372818967/2],
+              x:175,
+              y:442.65994313590517}
 
-var b123 = {shape:"rect",
-              static:false,
-              dims:[22.647945610455423,16.17438351708752],
-              x:326.88442897271335,
-              y:368.99424636380076}
-
-var b124 = {shape:"rect",
-              static:false,
-              dims:[39.30182539940228,36.33144642308958],
-              x:296.3135117874227,
-              y:421.50007630397783}
+var tower5 = [ground, b51, b52]
 
 var b125 = {shape:"rect",
               static:false,
@@ -88,25 +78,15 @@ var getMotion = function(initialWorld, widestBlock){
     },velocities)
     var sorted = sort(velocityToScoreMap)
     return sorted[sorted.length-1] //max of each block
-    //find the world where the boolean is true
-    //var blocksMaxScore = find(function(_x){return , velocityToScoreMap)
-    
-    //return //map of blocks to scores/distances
 
   }, worldMinusGround)
-var sortedMax = sort(blockToScoreMap)
-print(sortedMax)
-return sortedMax[sortedMax.length-1]
-
-
-  //var totalMaxScore = find(/*function that will find the max score in the map, return block and score*/, blockToScoreMap) //
-  //var halfSpeed = find(function(w_t){return w_t[0].velocity[0] < (worlds_t[0][0].velocity[0]/2)}, worlds_t)
-  //return totalMaxScore //or block, score, whatever
+  var sortedMax = sort(blockToScoreMap)
+  print(sortedMax)
+  return sortedMax[sortedMax.length-1]
 
 }
-var t5 = getMotion(tower12, widestBlock)
+var t5 = getMotion(tower5)
 print(t5)
-
 
 
 
