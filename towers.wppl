@@ -4,25 +4,38 @@ var ground = {shape:"rect",
               dims:[600,10],
               x:175,
               y:500.00000000000006}
-var b41 = {shape:"rect",
+//Tower 2
+var b121 = {shape:"rect",
               static:false,
-              dims:[80.4766451135908/2,65.44080881932777/2],
-              x:202.9496107821619,
-              y:344.40146820161004}
-var b42 = {shape:"rect",
+              dims:[33.44135428805417,14.20029829716379],
+              x:333.8708511360935,
+              y:243.0594474468529}
+var b122 = {shape:"rect",
               static:false,
-              dims:[29.700931679288345/2,48.58046804026043/2],
-              x:194.37651209789718,
-              y:401.41210663140413}
+              dims:[35.50704027394914,47.780058551348304],
+              x:315.07863325751214,
+              y:305.03980429536495}
 
-var b43 = {shape:"rect",
+var b123 = {shape:"rect",
               static:false,
-              dims:[63.93225213179547/2,64.29765934846566/2],
-              x:175,
-              y:457.85117032576716}
+              dims:[22.647945610455423,16.17438351708752],
+              x:326.88442897271335,
+              y:368.99424636380076}
 
-var tower4 = [ground, b41, b42, b43]
+var b124 = {shape:"rect",
+              static:false,
+              dims:[39.30182539940228,36.33144642308958],
+              x:296.3135117874227,
+              y:421.50007630397783}
 
+var b125 = {shape:"rect",
+              static:false,
+              dims:[31.90604709511714,16.084238636466296],
+              x:300,
+              y:473.9157613635337}
+
+var tower12 = [ground, b121, b122, b123, b124, b125]
+var widestBlock = 39.30182539940228
 var listMin = function(xs) {
   if (xs.length == 1) {
     return xs[0]
@@ -37,7 +50,7 @@ var doesTowerFall = function (initialW, finalW) {
   !approxEqual(highestY(initialW), highestY(finalW))
 }
 
-var helperFunction = function(velocity, block, world){
+var helperFunction = function(velocity, block, world, widest){
   var n = world.slice(0, block)
   var blockToPush = world[block]
   var blockCopy = {shape:"rect",
@@ -50,27 +63,27 @@ var helperFunction = function(velocity, block, world){
   var initState = physics.run(0, newWorld).reverse()
   var endState = physics.run(10000, newWorld).reverse()
   var towerFell = doesTowerFall(initState, endState)
-  if (towerFell){
+  var dist = Math.abs(initState[block].x - endState[block].x)
+  if (towerFell || dist > widest){
     return -1
   }
   else{
-    var dist = Math.abs(initState[block].x - endState[block].x)
     return dist*block
   }
   
 }
 
 //Collecting our motion data
-var getMotion = function(initialWorld){
+var getMotion = function(initialWorld, widestBlock){
   var worldMinusGround = _.range(1, initialWorld.length)
   var blockToScoreMap =  map(function(block){
 
     //find all velocities to try
-    var velocities =  _.range(0,10, 0.1) //make this finer intervals
+    var velocities =  _.range(0,400, 1) //make this finer intervals
 
     var velocityToScoreMap = map(function(v){ //for each block
       //helper function that takes in velocity and block, simulates, returns score if it worked
-      var score = helperFunction(v, block, initialWorld)
+      var score = helperFunction(v, block, initialWorld, widestBlock)
       return score
     },velocities)
     var sorted = sort(velocityToScoreMap)
@@ -82,6 +95,7 @@ var getMotion = function(initialWorld){
 
   }, worldMinusGround)
 var sortedMax = sort(blockToScoreMap)
+print(sortedMax)
 return sortedMax[sortedMax.length-1]
 
 
@@ -90,7 +104,7 @@ return sortedMax[sortedMax.length-1]
   //return totalMaxScore //or block, score, whatever
 
 }
-var t5 = getMotion(tower4)
+var t5 = getMotion(tower12, widestBlock)
 print(t5)
 
 
@@ -461,7 +475,7 @@ var b122 = {shape:"rect",
 var b123 = {shape:"rect",
               static:false,
               dims:[22.647945610455423,16.17438351708752],
-              x:a.88442897271335,
+              x:326.88442897271335,
               y:368.99424636380076}
 
 var b124 = {shape:"rect",
